@@ -1,9 +1,15 @@
-cmdListDir = "ls -lpth /c/Users/NazarethJ/'OneDrive - Broadridge Financial Solutions, Inc'/personal/documents/budget/mint/2025/dec"
-cmdreformatFFV2 = "java -cp ../../../bin formatFFV2 out/\"Transactions_Dec-27-2025 at 1.15.48 PM\".csv out/transactions.ffv2.28.csv"
-cmdOpeninXLS = "start dec.ffv2.csv"
-cmdOpeninTextPad = "c:/'Program Files'/TextPad/TextPad.exe -u  out/transactions.ffv2.28.csv"
-cmdBuildMonthXLS = "java -jar ../../bin/gp4.0.1.jar dec2.ffv2.csv -x -Pdir=out -Fjson=false"
-#cmdClean = "java -jar ../../bin/gp4.0.1.jar dec2.ffv2.csv -x -Pdir=out -Fjson=false -Pclean"
-cmdOpenMonthXLS = "start dec2.ffv2.csv.xlsx"
-cmdUpdateAnnualXLS = "java -jar ../../bin/gpTemplate.jar dec2.ffv2.csv.xlsx  ../../../annuals/2025/\"Annual 2025.xlsx\""
-cmdOpenAnnualXLS = "explorer \"Annual 2025.xlsx.lnk\""
+List Dir = "ls -lpth /c/Users/NazarethJ/'OneDrive - Broadridge Financial Solutions, Inc'/personal/documents/budget/mint/2026/jan"
+List Out Dir = "ls -lpth /c/Users/NazarethJ/'OneDrive - Broadridge Financial Solutions, Inc'/personal/documents/budget/mint/2026/jan/out"
+Separator = ""
+Open CSV = "start jan.ffv2.csv"
+#
+# "Reformat FFV2" command, replace csv source and target file
+Reformat FFV2 = "java -cp ../../bin formatFFV2 out/\"Transactions_Jan-07-2026 at 8.51.56 AM\".csv out/transactions.ffv2.7.csv"
+#
+# "Open in TextPad" command, replace target file
+Open in TextPad = "/c/\"Program Files\"/TextPad/TextPad.exe -u out/transactions.ffv2.7.csv"
+Build Month XLS = "java -jar ../../bin/gp4.0.2.jar jan.ffv2.csv -x -Pdir=out -Fjson=false"
+#Clean = "java -jar ../../bin/gp4.0.1.jar jan.ffv2.csv -x -Pdir=out -Fjson=false -Pclean"
+Open Month XLS = "start jan.ffv2.csv.xlsx"
+Update Annual XLS = "java -jar ../../bin/gpTemplate.jar jan.ffv2.csv.xlsx ../../../annuals/2026/\"Annual 2026.xlsx\""
+Open Annual XLS = "explorer \"Annual 2026.xlsx.lnk\""

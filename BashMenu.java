@@ -13,6 +13,7 @@ public class BashMenu {
     private static final String YELLOW = "\u001B[33m";
     private static final String BLUE = "\u001B[34m";
     private static final String CYAN = "\u001B[36m";
+    private static final String BRIGHT_GREEN = "\u001B[92m";
     private static final String NC = "\u001B[0m"; // No color
 
     private static List<String> bashMenuList = new java.util.ArrayList<>();
@@ -84,7 +85,7 @@ public class BashMenu {
             } else{
                 String commandKey = (String) commandMap.keySet().toArray()[i-1];
                 String commandInstruction = commandMap.get(commandKey);
-                System.out.println(BLUE + "You selected: " + commandInstruction + NC);
+                System.out.println(BRIGHT_GREEN + "You selected: " + commandInstruction + NC);
                 runInBash(commandInstruction);
             }
 
@@ -109,7 +110,7 @@ public class BashMenu {
         for (Map.Entry<String, String> entry : commandMap.entrySet()) {
             String commandName = entry.getKey();
             String commandInstruction = entry.getValue();
-            bashMenuList.add(GREEN + optionNumber + ")" + NC + " " + commandName + CYAN + " -> " + BLUE + commandInstruction + NC);
+            bashMenuList.add(GREEN + optionNumber + ")" + NC + " " + commandName + CYAN + " -> " + BRIGHT_GREEN + commandInstruction + NC);
             optionNumber++;
         }
 
