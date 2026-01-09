@@ -5,32 +5,32 @@
 #   ## Utilities
 
 # --- preparation ------------------------------------------------------------------
-# 1. replace month: 			mmm.ffv2.csv
-# 2. replace exported file name:	Transactions_Mmm-DD-YYYY at HH.MM.SS AM/PM
-# 3. replace reformatted FFV2 file: 	transactions.ffv2.[DD].csv
+# 1. replace [month]: 			[mmm].ffv2.csv
+# 2. replace exported [file name]:	Transactions_[Mmm-DD-YYYY at HH.MM.SS AM/PM]
+# 3. replace reformatted FFV2 [file]: 	transactions.ffv2.[DD].csv
 # ----------------------------------------------------------------------------------
 
 [List Directory]
 List Dir | ls -lpth
 List Out Dir | ls -lpth ./out
-
+---separator---
 --- View Transactions ---
 Open Month CSV | start jan.ffv2.csv
+---separator---
+--- 1] Reformat File ---
+Reformat FFV2 | java -cp ../../bin formatFFV2 out/'Transactions_Jan-08-2026 at 4.17.27 PM'.csv out/transactions.ffv2.8.csv
+Open Reformatted CSV | /c/'Program Files'/TextPad/TextPad.exe -u out/transactions.ffv2.8.csv
 
---- [1] Reformat File ---
-Reformat FFV2 | java -cp ../../bin formatFFV2 out/'Transactions_Jan-07-2026 at 8.51.56 AM'.csv out/transactions.ffv2.7.csv
-Open Reformatted CSV | /c/'Program Files'/TextPad/TextPad.exe -u out/transactions.ffv2.7.csv
-
---- [2] Build Month ---
+--- 2] Build Month ---
 Build Month XLS | java -jar ../../bin/gp4.0.2.jar jan.ffv2.csv -x -Pdir=out -Fjson=false
 Open Month XLS | start jan.ffv2.csv.xlsx
 
---- [3] Update Annual ---
+--- 3] Update Annual ---
 Update Annual XLS | java -jar ../../bin/gpTemplate.jar jan.ffv2.csv.xlsx ../../../annuals/2026/'Annual 2026'.xlsx
 Open Annual XLS | explorer 'Annual 2026.xlsx'.lnk
 
---- Clean ---
+--- 4] Clean ---
 Clean | java -jar ../../bin/gp4.0.2.jar jan.ffv2.csv -x -Pdir=out -Fjson=false -Pclean
 
---- Exit ---
+---separator---
 Exit |
