@@ -63,18 +63,24 @@ def show_cursor():
 HEADER_RE = re.compile(r"^\s*---+\s*(.+?)\s*---+\s*$")
 BRACKET_HEADER_RE = re.compile(r"^\s*\[(.+?)\]\s*$")
 HASH_HEADER_RE = re.compile(r"^\s*##+\s*(.+?)\s*$")
+SEPARATOR_RE = re.compile(r"^-{3,}$")
 
 def parse_line(line: str):
     """
     Returns:
       {"type": "header", "text": "..."} OR
-      {"type": "item", "label": "...", "cmd": "..."|None}
+      {"type": "item", "label": "...", "cmd": "..."|None} OR
+      {"type": "separator"}
     Or None for ignorable lines.
     """
     s = line.strip()
     if not s or s.startswith("#"):
         return None
 
+    # Separator line (e.g., --- or ---separator---)
+    if SEPARATOR_RE.match(s) or s.lower() == "---separator---":
+        return {"type": "separator"}
+    
     m = HEADER_RE.match(s) or BRACKET_HEADER_RE.match(s) or HASH_HEADER_RE.match(s)
     if m:
         return {"type": "header", "text": m.group(1).strip()}
@@ -161,6 +167,8 @@ def draw(items, selected: int):
     for i, it in enumerate(items):
         if it["type"] == "header":
             sys.stdout.write(f"{ANSI_BOLD}{COLOR_HEADER}{it['text']}{ANSI_RESET}\n")
+        elif it["type"] == "separator":
+            sys.stdout.write(f"{COLOR_HEADER}{'-' * 25}{ANSI_RESET}\n")
         else:
             label = it["label"]
             if i == selected:
